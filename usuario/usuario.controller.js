@@ -1,8 +1,8 @@
 const { v4: uuidv4 } = require("uuid");
-const UserService = require("./user.service");
+const UserService = require("./usuario.service.js");
 const userService = new UserService();
 const { GenericException } = require("../generic-exception.js");
-const UserDTO = require("./user.dto.js");
+const UserDTO = require("./usuario.dto.js");
 
 class UserController {
   createUser(req, res) {

@@ -1,6 +1,6 @@
 const { v4: uuidv4 } = require("uuid");
-const User = require("./user.entity.js");
-const UserDTO = require("./user.dto.js");
+const User = require("./usuario.entity.js");
+const UserDTO = require("./usuario.dto.js");
 const { GenericException } = require("../generic-exception.js");
 
 const users = [
