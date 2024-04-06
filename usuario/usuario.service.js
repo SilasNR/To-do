@@ -6,13 +6,19 @@ const { GenericException } = require("../generic-exception.js");
 const users = [
   {
     id: uuidv4(),
-    email: "teste@teste.com",
-    password: "123456",
+    username: "João",
+    email: "joao@gmail.com",
+    password: "P@ssW0rd",
+    isActive: true,
+    secretQuestion: "banana"
   },
   {
     id: uuidv4(),
-    email: "teste@2teste.com",
-    password: "123456",
+    username: "Maria",
+    email: "maria@ulife.com",
+    password: "P@ssW0rd",
+    isActive: true,
+    secretQuestion: "Orange"
   },
 ];
 
@@ -23,6 +29,10 @@ class UserService {
 
   findOne(id) {
     return users.find((user) => user.id === id);
+  }
+
+  findByEmail(email) {
+    return users.find(user => user.email === email);
   }
   
   create(UserDTO) {

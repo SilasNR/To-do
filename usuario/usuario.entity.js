@@ -1,13 +1,14 @@
 
-class Usuario {
+class User {
 
-    constructor(id, username, email, senha, status) {
+    constructor(id, username, email, password, secretQuestion, isActive) {
         this.id = id;
         this.username = username;
         this.email = email;
-        this.senha = senha;
-        this.status = status;
+        this.password = password;
+        this.secretQuestion = secretQuestion;
+        this.isActive = isActive;
     }
 }
 
-module.exports = Usuario;
+module.exports = User;

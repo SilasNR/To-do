@@ -1,16 +1,15 @@
 const { v4: uuidv4 } = require("uuid");
-// const UserService = require("./user.service");
-// const userService = new UserService();
+const UserService = require("./user.service");
+const userService = new UserService();
 const { GenericException } = require("../generic-exception.js");
 const UserDTO = require("./user.dto.js");
 
-class UsuarioController {
+class UserController {
   createUser(req, res) {
     req.body.id = uuidv4();
-    req.body.status = true;
     try {
       res.json(userService.create(new UserDTO(req.body, true)));
-    } catch(error) {
+    } catch (error) {
       res.status(400).json({ msg: error.message });
     }
   }
@@ -43,6 +42,40 @@ class UsuarioController {
     if (!result) return res.status(404).send("User not found");
     res.status(204).send();
   }
+
+  validarLogin(req, res) {
+    const { email, password } = req.body;
+
+    if (!email || !password) {
+      return res.status(400).json({ msg: "Email e senha são obrigatórios" });
+    }
+
+    const user = userService.findByEmail(email);
+
+    if (!user || user.password !== password) {
+      return res.status(401).json({ msg: "Credenciais inválidas" });
+    }
+
+    res.json({ msg: "Login bem-sucedido" });
+  }
+
+  recoverPassword(req, res) {
+    const { email, password, secretQuestion } = req.body;
+
+    if (!email || !secretQuestion) {
+      return res.status(400).json({ msg: "Email e palavra secreta são obrigatórios" });
+    }
+
+    const user = userService.findByEmail(email);
+
+    if (!user || user.secretQuestion !== secretQuestion) {
+      return res.status(401).json({ msg: "Credenciais inválidas" });
+    }
+
+    user.password = password;
+
+    res.json({ msg: "Senha alterada !!" });
+  }
 }
 
-module.exports = UsuarioController;
+module.exports = UserController;
