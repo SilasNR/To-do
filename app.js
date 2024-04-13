@@ -26,3 +26,10 @@ app.post("/users/recover", (req, res) => userController.recoverPassword(req, res
 app.listen(port, () => {
   console.log(`Servidor rodando em http://localhost:${port}`);
 });
+
+// Rotas para funcionalidade 2 do CRUD de Projetos
+app.post("/projects", (req, res) => userController.createUser(req, res));
+app.get("/projects", (req, res) => userController.getAllUsers(req, res));
+//app.get("/users/:id", (req, res) => userController.getUserById(req, res));
+app.put("/projects/:id", (req, res) => userController.updateUser(req, res));
+app.delete("/projects/:id", (req, res) => userController.deleteUser(req, res));
