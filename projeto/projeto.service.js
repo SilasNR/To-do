@@ -1,7 +1,7 @@
 const PorjectDTO = require("./projeto.dto");
 const { v4: uuidv4 } = require("uuid");
 
-const Project = [
+const projetos = [
     {
         id_projeto: uuidv4(),
         owner_projeto: 1,
@@ -18,4 +18,22 @@ const Project = [
     }
 ]
 
-class ProjetoService
+class ProjetoService {
+    create(PorjectDTO) {
+        projetos.push(PorjectDTO);
+        return PorjectDTO;
+    }
+
+    updade(PorjectDTO) {
+        const projetoIndex = projetos.findIndex((projeto) => projeto.id_projeto === PorjectDTO.id_projeto);
+        if (projetoIndex === -1) return null;
+        const updadeProjeto = PorjectDTO;
+        projetos[projetoIndex] = updadeProjeto;
+        return updadeProjeto;
+    }
+    findAll() {
+        return projetos.map((projeto) => new PorjectDTO(projeto));
+    }
+}
+
+module.exports = ProjetoService;

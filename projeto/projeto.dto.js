@@ -23,6 +23,18 @@ class Project {
         // if(!id_tarefa) throw new Error("")
         this.id_tarefa = id_tarefa;
     }
+
+    setNome_projeto(nome_projeto){
+        this.nome_projeto = nome_projeto;
+    }
+
+    setData_criacao(data_criacao){
+        this.data_criacao = data_criacao;
+    }
+
+    setStatus(status){
+        this.status = status;
+    }
 }
 
 
