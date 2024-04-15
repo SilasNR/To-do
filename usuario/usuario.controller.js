@@ -7,6 +7,7 @@ const UserDTO = require("./usuario.dto.js");
 class UserController {
   createUser(req, res) {
     req.body.id = uuidv4();
+    req.body.id = true;
     try {
       res.json(userService.create(new UserDTO(req.body, true)));
     } catch (error) {
