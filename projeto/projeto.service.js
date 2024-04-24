@@ -34,6 +34,10 @@ class ProjetoService {
     findAll() {
         return projetos.map((projeto) => new PorjectDTO(projeto));
     }
+
+    findOne(id) {
+        return projetos.find((projeto) => projeto.id === id);
+    }
 }
 
 module.exports = ProjetoService;

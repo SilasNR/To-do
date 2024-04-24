@@ -1,80 +1,83 @@
 const ProjetoDTO = require("./projeto.dto.js");
 const ProjetoService = require("./projeto.service.js");
+const { v4: uuidv4 } = require("uuid");
 
 const projetoService = new ProjetoService();
 
 class ProjetoController {
-    createUser(req, res) {
-      req.body.id = uuidv4();
+    createProjeto(req, res) {
+      const id = uuidv4()
+      req.body.id_projeto = id;
+      req.body.owner_projeto = id;
       try {
-        res.json(userService.create(new UserDTO(req.body, true)));
+        res.json(projetoService.create(new ProjetoDTO(req.body, true)));
       } catch (error) {
         res.status(400).json({ msg: error.message });
       }
     }
   
-    getAllUsers(req, res) {
+    getAllProjetos(req, res) {
       const projetos = projetoService.findAll();
       res.json(projetos);
     }
   
-    getUserById(req, res) {
+    getProjetoById(req, res) {
       const { id } = req.params;
-      const user = userService.findOne(id);
+      const projeto = projetoService.findOne(id);
   
-      if (!user) {
+      if (!projeto) {
         return res.status(404).send("register not found");
       }
-      res.json(user);
+      res.json(projeto);
     }
   
-    updateUser(req, res) {
+    updateProjeto(req, res) {
       req.body.id = req.params.id;
-      const updatedUser = userService.update(new UserDTO(req.body));
-      if (!updatedUser) return res.status(404).send("User not found");
-      res.status(200).json(updatedUser);
+      const updatedProjeto = projetoService.update(new ProjetoDTO(req.body));
+      if (!updatedProjeto) return res.status(404).send("User not found");
+      res.status(200).json(updatedProjeto);
     }
   
-    deleteUser(req, res) {
+    deleteProjeto(req, res) {
       const { id } = req.params;
-      const result = userService.remove(id);
+      const result = projetoService.remove(id);
       if (!result) return res.status(404).send("User not found");
       res.status(204).send();
     }
   
-    validarLogin(req, res) {
-      const { email, password } = req.body;
+    // validarLogin(req, res) {
+    //   const { email, password } = req.body;
   
-      if (!email || !password) {
-        return res.status(400).json({ msg: "Email e senha são obrigatórios" });
-      }
+    //   if (!email || !password) {
+    //     return res.status(400).json({ msg: "Email e senha são obrigatórios" });
+    //   }
   
-      const user = userService.findByEmail(email);
+    //   const user = userService.findByEmail(email);
   
-      if (!user || user.password !== password) {
-        return res.status(401).json({ msg: "Credenciais inválidas" });
-      }
+    //   if (!user || user.password !== password) {
+    //     return res.status(401).json({ msg: "Credenciais inválidas" });
+    //   }
   
-      res.json({ msg: "Login bem-sucedido" });
-    }
+    //   res.json({ msg: "Login bem-sucedido" });
+    // }
   
-    recoverPassword(req, res) {
-      const { email, password, secretQuestion } = req.body;
+    // recoverPassword(req, res) {
+    //   const { email, password, secretQuestion } = req.body;
   
-      if (!email || !secretQuestion) {
-        return res.status(400).json({ msg: "Email e palavra secreta são obrigatórios" });
-      }
+    //   if (!email || !secretQuestion) {
+    //     return res.status(400).json({ msg: "Email e palavra secreta são obrigatórios" });
+    //   }
   
-      const user = userService.findByEmail(email);
+    //   const user = userService.findByEmail(email);
   
-      if (!user || user.secretQuestion !== secretQuestion) {
-        return res.status(401).json({ msg: "Credenciais inválidas" });
-      }
+    //   if (!user || user.secretQuestion !== secretQuestion) {
+    //     return res.status(401).json({ msg: "Credenciais inválidas" });
+    //   }
   
-      user.password = password;
+    //   user.password = password;
   
-      res.json({ msg: "Senha alterada !!" });
-    }
+    //   res.json({ msg: "Senha alterada !!" });
+    // }
   }
 
   module.exports = ProjetoController;

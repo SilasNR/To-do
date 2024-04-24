@@ -2,7 +2,7 @@ class Project {
     constructor({ id_projeto, owner_projeto, id_tarefa, nome_projeto, data_criacao, status }) {
         this.setId(id_projeto);
         this.setOwner_projeto(owner_projeto);
-        this.setId_tarefa(id_tarefa);
+        // this.setId_tarefa(id_tarefa);
         this.setNome_projeto(nome_projeto);
         this.setData_criacao(data_criacao);
         this.setStatus(status);
@@ -19,10 +19,10 @@ class Project {
         this.owner_projeto = owner_projeto;
     }
 
-    setId_tarefa(id_tarefa) {
-        // if(!id_tarefa) throw new Error("")
-        this.id_tarefa = id_tarefa;
-    }
+    // setId_tarefa(id_tarefa) {
+    //     // if(!id_tarefa) throw new Error("")
+    //     this.id_tarefa = id_tarefa;
+    // }
 
     setNome_projeto(nome_projeto){
         this.nome_projeto = nome_projeto;

@@ -30,8 +30,8 @@ app.listen(port, () => {
 });
 
 // Rotas para funcionalidade 2 do CRUD de Projetos
-app.post("/projects", (req, res) => projetoController.createUser(req, res));
-app.get("/projects", (req, res) => projetoController.getAllUsers(req, res));
-//app.get("/users/:id", (req, res) => projetoController.getUserById(req, res));
-app.put("/projects/:id", (req, res) => projetoController.updateUser(req, res));
-app.delete("/projects/:id", (req, res) => projetoController.deleteUser(req, res));
+app.post("/projects", (req, res) => projetoController.createProjeto(req, res));
+app.get("/projects", (req, res) => projetoController.getAllProjetos(req, res));
+app.get("/projects/:id", (req, res) => projetoController.getProjetoById(req, res));
+app.put("/projects/:id", (req, res) => projetoController.updateProjeto(req, res));
+app.delete("/projects/:id", (req, res) => projetoController.deleteProjeto(req, res));
