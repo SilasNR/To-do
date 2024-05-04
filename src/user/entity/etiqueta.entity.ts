@@ -12,3 +12,5 @@ export class Etiqueta{
     @Column()
     cor: number;
 }
+
+export default Etiqueta;

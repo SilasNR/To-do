@@ -24,3 +24,5 @@ export class Equipe {
     projeto: any;
     
 }
+
+export default Equipe;

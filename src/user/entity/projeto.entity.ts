@@ -22,3 +22,5 @@ export class Projeto{
     @OneToMany(()=> Equipe, (Equipe)=> Equipe.projeto)
     equipe: Equipe[];
 }
+
+export default Projeto;

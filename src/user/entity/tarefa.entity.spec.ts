@@ -1,4 +1,4 @@
-import { TarefaEntity } from './tarefa.entity';
+import  TarefaEntity from './tarefa.entity';
 
 describe('TarefaEntity', () => {
   it('should be defined', () => {

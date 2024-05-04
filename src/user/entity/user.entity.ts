@@ -1,6 +1,6 @@
 import { Column, Entity, PrimaryGeneratedColumn, OneToMany } from "typeorm";
-import { filiacao } from "./filiacao.entity";
-import { Equipe } from "./equipe.entity";
+import { Filiacao } from "./filiacao.entity";
+import { Equipe }from "./equipe.entity";
 
 
 @Entity('user')
@@ -27,8 +27,8 @@ export class User{
     @Column({length: 100})
     secretQuestion: string;
 
-    @OneToMany(() => filiacao, (filiacao)=> filiacao.user)
-    filiacao: filiacao[];
+    @OneToMany(() => Filiacao, (Filiacao)=> Filiacao.user)
+    Filiacao: Filiacao[];
 
     @OneToMany(() => Equipe, (Equipe)=> Equipe.user)
     equipe: Equipe[];

@@ -1,4 +1,4 @@
-import { FiliacaoEntity } from './filiacao.entity';
+import  FiliacaoEntity from './filiacao.entity';
 
 describe('FiliacaoEntity', () => {
   it('should be defined', () => {

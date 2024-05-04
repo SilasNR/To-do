@@ -2,11 +2,11 @@ import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColum
 import { User } from "./user.entity"
 
 @Entity('filiacao')
-export class filiacao{
+export class Filiacao{
     @PrimaryGeneratedColumn()
     id_filiacao: number;
 
-    @ManyToOne(() => User, (User) => User.filiacao )
+    @ManyToOne(() => User, (User) => User.Filiacao )
     @JoinColumn({name: 'id_login'})
     user: User;
 
@@ -27,4 +27,4 @@ export class filiacao{
     
 }
 
-export default filiacao;
+export default Filiacao;

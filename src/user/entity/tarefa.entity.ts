@@ -19,3 +19,5 @@ export class Tarefa{
     data_entrega: Date;
 
 }
+
+export default Tarefa;
