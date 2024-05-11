@@ -1,11 +1,10 @@
-import { IsEmail, IsString, Length, Matches } from 'class-validator';
-
+import { IsEmail, IsString, Length, Matches, IsBoolean } from 'class-validator';
 import { PartialType } from '@nestjs/mapped-types';
 
 export class CreateUserDto {
   @IsString()
-  @Length(8, 40, { message: 'o tamanho minimo do nome é 8 caracteres' })
-  nome: string;
+  @Length(8, 40, { message: 'o tamanho minimo do usuario é 8 caracteres' })
+  username: string;
 
   @IsEmail()
   @Length(8, 40, { message: 'o tamanho minimo do e-mail é 8 caracteres' })
@@ -16,7 +15,13 @@ export class CreateUserDto {
     message:
       'a senha deve ter pelo menos 8 caracteres, incluindo uma pelo menos: uma letra maiúscula, uma letra minúscula, um número e um caractere especial',
   })
-  senha: string;
+  password: string;
+
+  @IsBoolean()
+  status: boolean;
+
+  @IsString()
+  secret_question: string;
 }
 
 export class UpdateUserDto extends PartialType(CreateUserDto) {}

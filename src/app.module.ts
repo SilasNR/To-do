@@ -3,13 +3,14 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { DatabaseModule } from './database/database.module';
 import { UserModule } from './user/user.module';
-import { EquipeModule } from './equipe/equipe.module';
-import { ProjetoModule } from './projeto/projeto.module';
-import { TarefaModule } from './tarefa/tarefa.module';
-import { EtiquetaModule } from './etiqueta/etiqueta.module';
+import { ProjectModule } from './project/project.module';
+import { TaskModule } from './task/task.module';
+import { TagModule } from './tag/tag.module';
+import { TeamModule } from './team/team.module';
+import { TaggedModule } from './tagged/tagged.module';
 
 @Module({
-  imports: [DatabaseModule, UserModule, EquipeModule, ProjetoModule, TarefaModule, EtiquetaModule],
+  imports: [DatabaseModule, UserModule, ProjectModule, TaskModule, TagModule, TeamModule, TaggedModule],
   controllers: [AppController],
   providers: [AppService],
 })

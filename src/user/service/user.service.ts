@@ -1,10 +1,8 @@
-
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from '../entity/user.entity';
 import { CreateUserDto, UpdateUserDto } from '../dto/user.dto';
-import * as bcrypt from 'bcryptjs';
 
 @Injectable()
 export class UserService {
@@ -14,14 +12,24 @@ export class UserService {
   ) {}
 
   async findAll(): Promise<User[]> {
-    return await this.userRepository.find({ relations: ['filiacoes'] });
+    return await this.userRepository.find();
   }
+
+  //   # Com relation para se precisar depois:
+  //   async findAll(): Promise<User[]> {
+  //     return await this.userRepository.find({ relations: ['project', 'team'] });
+  //   }
 
   async findOne(id: number): Promise<User> {
     const user = await this.userRepository.findOne({
-      where: { id_login: id },
-      relations: ['filiacoes'],
+      where: { id_user: id },
     });
+
+    //   # Com relation para se precisar depois:
+    //   const user = await this.userRepository.findOne({
+    //     where: { id_user: id },
+    //     relations: ['project', 'team'],
+    //   });
 
     if (!user) {
       throw new HttpException(`Usuário não encontrado.`, HttpStatus.NOT_FOUND);
@@ -29,26 +37,8 @@ export class UserService {
     return user;
   }
 
-  async findByEmail(email: string): Promise<User>{
-    const user = await this.userRepository.findOne({
-      where: { email : email}, 
-      relations: ['filiacoes'],
-    });
-
-    if(!user){
-      throw new HttpException(`Usuário não encontrado.`, HttpStatus.NOT_FOUND);
-    }
-
-    return user;
-  }
-  
-
   async create(createUserDto: CreateUserDto): Promise<User> {
     try {
-      const saltOrRounds = 10; // o custo do processamento, 10 é geralmente suficiente
-      const hash = await bcrypt.hash(createUserDto.senha, saltOrRounds);
-      createUserDto.senha = hash; // substitui a senha original pelo hash
-
       return await this.userRepository.save(
         this.userRepository.create(createUserDto),
       );
