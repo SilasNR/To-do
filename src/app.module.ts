@@ -8,9 +8,10 @@ import { TaskModule } from './task/task.module';
 import { TagModule } from './tag/tag.module';
 import { TeamModule } from './team/team.module';
 import { TaggedModule } from './tagged/tagged.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
-  imports: [DatabaseModule, UserModule, ProjectModule, TaskModule, TagModule, TeamModule, TaggedModule],
+  imports: [DatabaseModule, UserModule, ProjectModule, TaskModule, TagModule, TeamModule, TaggedModule, AuthModule],
   controllers: [AppController],
   providers: [AppService],
 })
