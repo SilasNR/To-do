@@ -3,13 +3,13 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from '../entity/user.entity';
 import { CreateUserDto, UpdateUserDto } from '../dto/user.dto';
-
+import * as bcrypt from 'bcryptjs';
 @Injectable()
 export class UserService {
   constructor(
     @InjectRepository(User)
     private userRepository: Repository<User>,
-  ) {}
+  ) { }
 
   async findAll(): Promise<User[]> {
     return await this.userRepository.find();
@@ -39,6 +39,9 @@ export class UserService {
 
   async create(createUserDto: CreateUserDto): Promise<User> {
     try {
+      const saltOrRounds = 10; // o custo do processamento, 10 é geralmente suficiente
+      const hash = await bcrypt.hash(createUserDto.password, saltOrRounds);
+      createUserDto.password = hash; // substitui a senha original pelo hash
       return await this.userRepository.save(
         this.userRepository.create(createUserDto),
       );

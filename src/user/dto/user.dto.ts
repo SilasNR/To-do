@@ -18,10 +18,10 @@ export class CreateUserDto {
   password: string;
 
   @IsBoolean()
-  status: boolean;
+  status?: boolean;
 
   @IsString()
-  secret_question: string;
+  secret_question?: string;
 }
 
 export class UpdateUserDto extends PartialType(CreateUserDto) {}

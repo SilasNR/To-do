@@ -7,8 +7,9 @@ export class AuthController {
     
     @Post('login')
     async login(@Body() loginDto: {email: string, password: string}){
+        console.log("batatinha frita",loginDto);
         const user = await this.authService.validateUser(loginDto.email, loginDto.password);
-        if(user!) {
+        if(!user) {
             throw new NotFoundException('Credencias inválidas');
         }
         return this.authService.login(user);
