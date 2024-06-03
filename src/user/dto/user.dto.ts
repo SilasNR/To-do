@@ -1,15 +1,19 @@
 import { IsEmail, IsString, Length, Matches, IsBoolean } from 'class-validator';
 import { PartialType } from '@nestjs/mapped-types';
+import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateUserDto {
+  @ApiProperty({ description: 'Usuário do usuário' })
   @IsString()
   @Length(8, 40, { message: 'o tamanho minimo do usuario é 8 caracteres' })
   username: string;
 
+  @ApiProperty({ description: 'Email do usuário' })
   @IsEmail()
   @Length(8, 40, { message: 'o tamanho minimo do e-mail é 8 caracteres' })
   email: string;
 
+  @ApiProperty({ description: 'Senha do usuário' })
   @IsString()
   @Matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/, {
     message:
@@ -17,11 +21,13 @@ export class CreateUserDto {
   })
   password: string;
 
+  @ApiProperty({ description: 'Estado do usuário (ativo ou inativo)' })
   @IsBoolean()
-  status?: boolean;
+  status: boolean;
 
+  @ApiProperty({ description: 'Resposta da pergunta secreta para recuperar a senha' })
   @IsString()
-  secret_question?: string;
+  secret_question: string;
 }
 
 export class UpdateUserDto extends PartialType(CreateUserDto) {}

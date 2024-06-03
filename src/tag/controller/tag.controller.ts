@@ -9,27 +9,37 @@ import {
 } from '@nestjs/common';
 import { CreateTagDto, UpdateTagDto } from '../dto/tag.dto';
 import { TagService } from '../service/tag.service';
+import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 
 @Controller('tag')
+@ApiTags('tag')
 export class TagController {
   constructor(private readonly tagService: TagService) {}
 
   @Get()
+  @ApiOperation({ summary: 'Retorna todas as tags' })
+  @ApiResponse({ status: 200, description: 'Success.' })
   async findAll(): Promise<any[]> {
     return this.tagService.findAll();
   }
 
   @Get(':id')
+  @ApiOperation({ summary: 'Retorna uma tag pelo id' })
+  @ApiResponse({ status: 200, description: 'Success.' })
   async findOne(@Param('id') id: number): Promise<any> {
     return this.tagService.findOne(id);
   }
 
   @Post()
+  @ApiOperation({ summary: 'Cria uma nova tag ' })
+  @ApiResponse({ status: 200, description: 'Success.' })
   async create(@Body() createTagDto: CreateTagDto): Promise<any> {
     return this.tagService.create(createTagDto);
   }
 
   @Put(':id')
+  @ApiOperation({ summary: 'Altera tag selecionada por id' })
+  @ApiResponse({ status: 200, description: 'Success.' })
   async update(
     @Param('id') id: number,
     @Body() updateTagDto: UpdateTagDto,
@@ -38,6 +48,8 @@ export class TagController {
   }
 
   @Delete(':id')
+  @ApiOperation({ summary: 'Deleta tag selecionada por id' })
+  @ApiResponse({ status: 200, description: 'Success.' })
   async delete(@Param('id') id: number): Promise<void> {
     return this.tagService.delete(id);
   }
