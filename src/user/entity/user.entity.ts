@@ -23,9 +23,6 @@ export class User {
   @Column()
   password: string;
 
-  @Column()
-  status: boolean;
-
   @Column({ length: 20 })
   secret_question: string;
 

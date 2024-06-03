@@ -21,9 +21,7 @@ export class CreateUserDto {
   })
   password: string;
 
-  @ApiProperty({ description: 'Estado do usuário (ativo ou inativo)' })
-  @IsBoolean()
-  status: boolean;
+
 
   @ApiProperty({ description: 'Resposta da pergunta secreta para recuperar a senha' })
   @IsString()

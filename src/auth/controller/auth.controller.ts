@@ -10,10 +10,10 @@ export class AuthController {
   @Post('login')
   @ApiOperation({ summary: 'Faz Login' })
   @ApiResponse({ status: 200, description: 'Success.' })
-  async login(@Body() loginDto: { email: string; senha: string }) {
+  async login(@Body() loginDto: { email: string; password: string }) {
     const user = await this.authService.validateUser(
       loginDto.email,
-      loginDto.senha,
+      loginDto.password,
     );
     if (!user) {
       throw new NotFoundException('Credenciais inválidas');

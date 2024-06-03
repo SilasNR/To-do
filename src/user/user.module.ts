@@ -11,5 +11,6 @@ import { UserController } from './controller/user.controller';
   imports: [DatabaseModule, TypeOrmModule.forFeature([User])],
   controllers: [AppController, UserController],
   providers: [AppService, UserService],
+  exports: [UserService, TypeOrmModule]
 })
 export class UserModule {}
