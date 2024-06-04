@@ -74,4 +74,4 @@ Nest is [MIT licensed](LICENSE).
 
 ## link para o FrontEnd
 
-https://github.com/SilasNR/To-do-front-end
+https://github.com/BruDOS/front
