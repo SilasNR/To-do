@@ -11,6 +11,7 @@ export class AuthController {
   @ApiOperation({ summary: 'Faz Login' })
   @ApiResponse({ status: 200, description: 'Success.' })
   async login(@Body() loginDto: { email: string; password: string }) {
+    console.log("batatinha frita", loginDto)
     const user = await this.authService.validateUser(
       loginDto.email,
       loginDto.password,
