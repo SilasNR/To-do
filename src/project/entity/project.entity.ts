@@ -9,13 +9,13 @@ export class Project {
   id_project: number;
 
   @Column({ length: 20 })
-  name: string;
-
-  @Column({ type: 'date' })
-  creation_date: Date;
+  name_project: string;
 
   @Column({ length: 20 })
-  status: string;
+  status_project: string;
+
+  @Column({ length: 200 })
+  resume_project: string;
 
   // dono do projeto
   @OneToMany(() => User, (user) => user.project)
@@ -28,4 +28,7 @@ export class Project {
   // equipe do projeto
   @OneToMany(() => Team, (team) => team.project)
   team: Team[];
+
+  @Column()
+  projectIdProject: number;
 }
