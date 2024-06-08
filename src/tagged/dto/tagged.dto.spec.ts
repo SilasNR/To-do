@@ -1,7 +1,7 @@
-import { TaggedDto } from './tagged.dto';
+import { CreateTaggedDto } from './tagged.dto';
 
 describe('TaggedDto', () => {
   it('should be defined', () => {
-    expect(new TaggedDto()).toBeDefined();
+    expect(new CreateTaggedDto()).toBeDefined();
   });
 });

@@ -1,7 +1,7 @@
-import { ProjectEntity } from './project.entity';
+import { Project } from './project.entity';
 
 describe('ProjectEntity', () => {
   it('should be defined', () => {
-    expect(new ProjectEntity()).toBeDefined();
+    expect(new Project()).toBeDefined();
   });
 });

@@ -19,9 +19,6 @@ export class Task {
   @Column({ length: 100 })
   description: string;
 
-  @Column()
-  deadline: Date;
-
   // projeto da tarefa
   @ManyToOne(() => Project, (project) => project.task)
   project: Project[];

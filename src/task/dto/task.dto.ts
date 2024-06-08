@@ -11,9 +11,6 @@ export class CreateTaskDto {
   @IsString()
   description: string;
 
-  @ApiProperty({ description: 'Prazo da tarefa' })
-  @IsDate()
-  deadline: Date;
 }
 
 export class UpdateTaskDto extends PartialType(CreateTaskDto) {}

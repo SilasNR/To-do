@@ -1,7 +1,7 @@
-import { TagEntity } from './tag.entity';
+import { Tag } from './tag.entity';
 
 describe('TagEntity', () => {
   it('should be defined', () => {
-    expect(new TagEntity()).toBeDefined();
+    expect(new Tag()).toBeDefined();
   });
 });

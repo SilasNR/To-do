@@ -20,7 +20,7 @@ import { AuthService } from './service/auth.service';
     UserModule,
     PassportModule,
   ],
-  providers: [AuthService, JwtStrategy, AuthService],
+  providers: [AuthService, JwtStrategy],
   controllers: [AuthController],
 })
 export class AuthModule {}
