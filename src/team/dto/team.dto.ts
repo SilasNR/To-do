@@ -1,16 +1,12 @@
-import { IsBoolean, IsDate } from 'class-validator';
 import { PartialType } from '@nestjs/mapped-types';
-import { ApiProperty } from '@nestjs/swagger';
-
+import { IsInt } from 'class-validator';
 
 export class CreateTeamDto {
-  @ApiProperty({ description: 'Usuario participa do projeto' })
-  @IsBoolean()
-  is_active: boolean;
+  @IsInt()
+  userId: number;
 
-  @ApiProperty({ description: 'Data que o usuario entrou no projeto' })
-  @IsDate()
-  joined_at: Date;
+  @IsInt()
+  projectId: number;
 }
 
 export class UpdateTeamDto extends PartialType(CreateTeamDto) {}

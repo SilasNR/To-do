@@ -1,13 +1,5 @@
-import {
-  Body,
-  Controller,
-  Delete,
-  Get,
-  Param,
-  Post,
-  Put,
-} from '@nestjs/common';
-import { CreateTeamDto, UpdateTeamDto } from '../dto/team.dto';
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import { CreateTeamDto } from '../dto/team.dto';
 import { TeamService } from '../service/team.service';
 import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 
@@ -25,11 +17,14 @@ export class TeamController {
     return this.teamService.findAll();
   }
 
-  @Get(':id')
+  @Get(':userId/:projectId')
   @ApiOperation({ summary: 'Retorna um time pelo id' })
   @ApiResponse({ status: 200, description: 'Success.' })
-  async findOne(@Param('id') id: number): Promise<any> {
-    return this.teamService.findOne(id);
+  async findOne(
+    @Param('userId') userId: number,
+    @Param('projectId') projectId: number,
+  ): Promise<any> {
+    return this.teamService.findOne(userId, projectId);
   }
 
   @Post()
@@ -39,20 +34,13 @@ export class TeamController {
     return this.teamService.create(createTeamDto);
   }
 
-  @Put(':id')
-  @ApiOperation({ summary: 'Altera time selecionado por id' })
-  @ApiResponse({ status: 200, description: 'Success.' })
-  async update(
-    @Param('id') id: number,
-    @Body() updateTeamDto: UpdateTeamDto,
-  ): Promise<any> {
-    return this.teamService.update(id, updateTeamDto);
-  }
-
-  @Delete(':id')
+  @Delete(':userId/:projectId')
   @ApiOperation({ summary: 'Deleta time selecionado por id' })
   @ApiResponse({ status: 200, description: 'Success.' })
-  async delete(@Param('id') id: number): Promise<void> {
-    return this.teamService.delete(id);
+  async delete(
+    @Param('userId') userId: number,
+    @Param('projectId') projectId: number,
+  ): Promise<void> {
+    return this.teamService.delete(userId, projectId);
   }
 }

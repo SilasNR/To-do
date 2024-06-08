@@ -1,23 +1,22 @@
 import { Project } from 'src/project/entity/project.entity';
 import { User } from 'src/user/entity/user.entity';
-import { Entity, Column, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, JoinColumn, ManyToOne, PrimaryColumn } from 'typeorm';
 
 @Entity('team')
 export class Team {
-  @PrimaryGeneratedColumn()
-  id_team: number;
+  @PrimaryColumn()
+  userId: number;
 
-  @Column()
-  is_active: boolean;
-
-  @Column()
-  joined_at: Date;
+  @PrimaryColumn()
+  projectId: number;
 
   //usuarios da equipe
   @ManyToOne(() => User, (user) => user.team)
+  @JoinColumn({ name: 'userId' })
   user: User[];
 
   //projeto da equipe
   @ManyToOne(() => Project, (project) => project.team)
+  @JoinColumn({ name: 'projectId' })
   project: Project[];
 }

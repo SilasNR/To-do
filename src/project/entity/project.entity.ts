@@ -1,7 +1,13 @@
 import { Task } from 'src/task/entity/task.entity';
 import { User } from 'src/user/entity/user.entity';
 import { Team } from 'src/team/entity/team.entity';
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  OneToMany,
+  ManyToOne,
+} from 'typeorm';
 
 @Entity('project')
 export class Project {
@@ -18,7 +24,7 @@ export class Project {
   resume_project: string;
 
   // dono do projeto
-  @OneToMany(() => User, (user) => user.project)
+  @ManyToOne(() => User, (user) => user.project)
   user: User[];
 
   // tarefas do projeto
@@ -28,7 +34,4 @@ export class Project {
   // equipe do projeto
   @OneToMany(() => Team, (team) => team.project)
   team: Team[];
-
-  @Column()
-  projectIdProject: number;
 }

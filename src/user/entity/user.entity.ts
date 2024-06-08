@@ -1,12 +1,6 @@
 import { Project } from 'src/project/entity/project.entity';
 import { Team } from 'src/team/entity/team.entity';
-import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-  ManyToOne,
-  OneToMany,
-} from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
 // import { Equipe } from "./equipe.entity";
 
 @Entity('user')
@@ -27,7 +21,7 @@ export class User {
   secret_question: string;
 
   // dono do projeto
-  @ManyToOne(() => Project, (project) => project.user)
+  @OneToMany(() => Project, (project) => project.user)
   project: Project[];
 
   // equipes do usuario

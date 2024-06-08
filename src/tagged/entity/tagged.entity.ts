@@ -1,17 +1,20 @@
 import { Tag } from 'src/tag/entity/tag.entity';
 import { Task } from 'src/task/entity/task.entity';
-import { Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, JoinColumn, ManyToOne, PrimaryColumn } from 'typeorm';
 
 @Entity('tagged')
 export class Tagged {
-  @PrimaryGeneratedColumn()
-  id_tagged: number;
+  @PrimaryColumn()
+  tagId: number;
 
-  // tags da tarefa
+  @PrimaryColumn()
+  taskId: number;
+
   @ManyToOne(() => Tag, (tag) => tag.tagged)
-  tag: Tag[];
+  @JoinColumn({ name: 'tagId' })
+  tag: Tag;
 
-  // tarefas com a tag
   @ManyToOne(() => Task, (task) => task.tagged)
-  task: Task[];
+  @JoinColumn({ name: 'taskId' })
+  task: Task;
 }

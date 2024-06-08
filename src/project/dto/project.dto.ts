@@ -1,4 +1,4 @@
-import { IsDate, IsIn, IsInt, IsString } from 'class-validator';
+import { IsInt, IsString } from 'class-validator';
 import { PartialType } from '@nestjs/mapped-types';
 import { ApiProperty } from '@nestjs/swagger';
 
@@ -14,9 +14,6 @@ export class CreateProjectDto {
   @ApiProperty({ description: 'Status do projeto' })
   @IsString()
   status_project: string;
-
-  @IsInt()
-  projectIdProject: number;
 }
 
 export class UpdateProjectDto extends PartialType(CreateProjectDto) {}
