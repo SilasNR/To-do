@@ -16,21 +16,10 @@ export class UserService {
     return await this.userRepository.find();
   }
 
-  //   # Com relation para se precisar depois:
-  //   async findAll(): Promise<User[]> {
-  //     return await this.userRepository.find({ relations: ['project', 'team'] });
-  //   }
-
   async findOne(id: number): Promise<User> {
     const user = await this.userRepository.findOne({
       where: { id_user: id },
     });
-
-    //   # Com relation para se precisar depois:
-    //   const user = await this.userRepository.findOne({
-    //     where: { id_user: id },
-    //     relations: ['project', 'team'],
-    //   });
 
     if (!user) {
       throw new HttpException(`Usuário não encontrado.`, HttpStatus.NOT_FOUND);
@@ -39,7 +28,16 @@ export class UserService {
   }
 
   async create(createUserDto: CreateUserDto): Promise<User> {
+    const existingUser = await this.userRepository.findOne({
+      where: { email: createUserDto.email },
+    });
+
+    if (existingUser) {
+      console.log('User with email already exists:', createUserDto.email);
+      throw new HttpException('Email já registrado.', HttpStatus.BAD_REQUEST);
+    }
     try {
+      console.log('Saving new user:', createUserDto);
       const saltOrRounds = 10; // o custo do processamento, 10 é geralmente suficiente
       const hash = await bcrypt.hash(createUserDto.password, saltOrRounds);
       createUserDto.password = hash; // substitui a senha original pelo hash
@@ -50,6 +48,7 @@ export class UserService {
       if (error.code === 'ER_DUP_ENTRY') {
         throw new HttpException('Email já registrado.', HttpStatus.BAD_REQUEST);
       } else {
+        console.error('Erro ao salvar o usuario:', error);
         throw new HttpException(
           'Erro ao criar o registro. Tente novamente mais tarde.',
           HttpStatus.INTERNAL_SERVER_ERROR,

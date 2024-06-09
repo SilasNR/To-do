@@ -59,11 +59,16 @@ describe('UserService', () => {
       secret_question: 'favorite color?',
     };
 
+    console.log('Setting up mock for findOne to return null');
     mockUserRepository.findOne.mockResolvedValue(null); // Simulate no user found
+
+    console.log('Setting up mock for save');
     mockUserRepository.save.mockResolvedValue({ id: 1, ...createUserDto }); // Simulate successful save
 
+    console.log('Calling service.create');
     const result = await service.create(createUserDto);
 
+    console.log('Asserting the result');
     expect(result).toEqual({ id: 1, ...createUserDto });
     expect(mockUserRepository.findOne).toHaveBeenCalledWith({
       where: { email: 'test@example.com' },
