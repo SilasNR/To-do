@@ -3,6 +3,7 @@ import { getRepositoryToken } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { UserService } from './user.service';
 import { User } from '../entity/user.entity';
+import { CreateUserDto } from '../dto/user.dto';
 
 describe('UserService', () => {
   let service: UserService;
@@ -31,6 +32,10 @@ describe('UserService', () => {
     repository = module.get<Repository<User>>(getRepositoryToken(User));
   });
 
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
   it('should be defined', () => {
     expect(service).toBeDefined();
   });
@@ -47,17 +52,25 @@ describe('UserService', () => {
   });
 
   it('should create a new user', async () => {
-    const createUserDto = {
+    const createUserDto: CreateUserDto = {
       username: 'testuser',
       email: 'test@example.com',
-      password: 'P@ssword123',
-      secret_question: 'What is your favorite color?',
+      password: 'Password123@',
+      secret_question: 'favorite color?',
     };
 
-    const user = { id: 1, ...createUserDto };
+    mockUserRepository.findOne.mockResolvedValue(null); // Simulate no user found
+    mockUserRepository.save.mockResolvedValue({ id: 1, ...createUserDto }); // Simulate successful save
 
-    mockUserRepository.save.mockResolvedValue(user);
-    expect(await service.create(createUserDto)).toEqual(user);
+    const result = await service.create(createUserDto);
+
+    expect(result).toEqual({ id: 1, ...createUserDto });
+    expect(mockUserRepository.findOne).toHaveBeenCalledWith({
+      where: { email: 'test@example.com' },
+    });
+    expect(mockUserRepository.save).toHaveBeenCalledWith(
+      expect.objectContaining(createUserDto),
+    );
   });
 
   it('should update a user', async () => {
