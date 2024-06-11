@@ -23,6 +23,13 @@ export class ProjectController {
     return this.projectService.findAll();
   }
 
+  @Get('user/:iduser')
+  @ApiOperation({ summary: 'Retorna todos os projetos do usuario' })
+  @ApiResponse({ status: 200, description: 'Success.' })
+  async findAllUserProject(@Param('iduser') iduser: number): Promise<any[]> {
+    return this.projectService.findAllUserProject(iduser);
+  }
+
   @Get(':id')
   @ApiOperation({ summary: 'Retorna um projeto pelo id' })
   @ApiResponse({ status: 200, description: 'Success.' })

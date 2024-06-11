@@ -27,6 +27,9 @@ export class Project {
   @ManyToOne(() => User, (user) => user.project)
   user: User[];
 
+  @Column()
+  userIdUser: number;
+
   // tarefas do projeto
   @OneToMany(() => Task, (task) => task.project)
   task: Task[];
