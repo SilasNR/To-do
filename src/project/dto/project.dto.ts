@@ -14,6 +14,9 @@ export class CreateProjectDto {
   @ApiProperty({ description: 'Status do projeto' })
   @IsString()
   status_project: string;
+
+  @IsInt()
+  userIdUser: number;
 }
 
 export class UpdateProjectDto extends PartialType(CreateProjectDto) {}

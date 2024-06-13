@@ -1,0 +1,52 @@
+{
+    "clientName": "Thunder Client",
+    "collectionName": "projetos",
+    "collectionId": "8e480bdf-ff60-491d-98de-b086b5f0edbc",
+    "dateExported": "2024-06-10T23:00:52.290Z",
+    "version": "1.2",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "db8e435d-5466-4c37-9b3d-9079ec613bd5",
+            "colId": "8e480bdf-ff60-491d-98de-b086b5f0edbc",
+            "containerId": "",
+            "name": "criar projeto",
+            "url": "localhost:4000/project",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2024-06-10T22:37:30.956Z",
+            "modified": "2024-06-10T22:48:59.660Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name_project\": \"bruno grande\", \n  \"resume_project\": \"Este projeto é muito grande\" ,\n  \"status_project\": \"em andamento\",\n  \"userIdUser\": 1\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "0deb7a90-915f-410f-a8f5-e01c98b61c41",
+            "colId": "8e480bdf-ff60-491d-98de-b086b5f0edbc",
+            "containerId": "",
+            "name": "lista projetos usuario",
+            "url": "localhost:4000/user",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2024-06-10T22:51:32.556Z",
+            "modified": "2024-06-10T22:51:47.799Z",
+            "headers": []
+        },
+        {
+            "_id": "c021be96-8223-48ac-a660-b4ded14ab85b",
+            "colId": "8e480bdf-ff60-491d-98de-b086b5f0edbc",
+            "containerId": "",
+            "name": "lista de projetos por usuario",
+            "url": "localhost:4000/project/user/1",
+            "method": "GET",
+            "sortNum": 30000,
+            "created": "2024-06-10T23:00:22.308Z",
+            "modified": "2024-06-10T23:00:32.790Z",
+            "headers": []
+        }
+    ],
+    "ref": "tzYess_eYAPbYCfjU_DiL5GhBT__WpQhg74DpycIyIvI0Czty5Dhd4_NW6UtXYfzLbc40-o5CwRrACrZ4otAvw"
+}

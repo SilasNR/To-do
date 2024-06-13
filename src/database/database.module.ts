@@ -20,8 +20,10 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
         password: configService.get<string>('DB_PASSWORD'),
         database: configService.get<string>('DB_DATABASE'),
         entities: [configService.get<string>('DB_ENTITIES')],
+        secretOrKey: configService.get<string>('JWT_SECRET'),
         synchronize: configService.get<boolean>('DB_SYNCHRONIZE'),
         logging: configService.get<boolean>('DB_LOGGING'),
+
       }),
     }),
   ],

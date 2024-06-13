@@ -1,4 +1,4 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable, NotImplementedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Project } from '../entity/project.entity';
@@ -14,6 +14,13 @@ export class ProjectService {
   async findAll(): Promise<Project[]> {
     return await this.projectRepository.find();
   }
+
+  async findAllUserProject(iduser: number): Promise<Project[]> {
+    return await this.projectRepository.find({
+      where:{userIdUser: iduser},
+    });
+  }
+
 
   async findOne(id: number): Promise<Project> {
     const project = await this.projectRepository.findOne({
