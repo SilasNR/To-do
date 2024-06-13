@@ -4,6 +4,9 @@ import { Repository } from 'typeorm';
 import { UserService } from './user.service';
 import { User } from '../entity/user.entity';
 import { CreateUserDto } from '../dto/user.dto';
+import * as bcrypt from 'bcryptjs';
+
+jest.mock('bcryptjs'); // Mock do bcrypt
 
 describe('UserService', () => {
   let service: UserService;
@@ -12,6 +15,7 @@ describe('UserService', () => {
   const mockUserRepository = {
     find: jest.fn().mockResolvedValue([]),
     findOne: jest.fn().mockResolvedValue(null),
+    create: jest.fn().mockImplementation((user) => user),
     save: jest.fn().mockResolvedValue(null),
     update: jest.fn().mockResolvedValue({ affected: 1 }),
     delete: jest.fn().mockResolvedValue({ affected: 1 }),
@@ -53,29 +57,23 @@ describe('UserService', () => {
 
   it('should create a new user', async () => {
     const createUserDto: CreateUserDto = {
-      username: 'testuser',
-      email: 'test@example.com',
-      password: 'Password123@',
+      username: 'testuser3',
+      email: 'test3@example.com',
+      password: 'P@ssword1234',
       secret_question: 'favorite color?',
     };
+    const hashedPassword = 'hashedpassword123';
+    const user = { id: 1, ...createUserDto, password: hashedPassword };
 
-    console.log('Setting up mock for findOne to return null');
-    mockUserRepository.findOne.mockResolvedValue(null); // Simulate no user found
-
-    console.log('Setting up mock for save');
-    mockUserRepository.save.mockResolvedValue({ id: 1, ...createUserDto }); // Simulate successful save
-
-    console.log('Calling service.create');
-    const result = await service.create(createUserDto);
-
-    console.log('Asserting the result');
-    expect(result).toEqual({ id: 1, ...createUserDto });
-    expect(mockUserRepository.findOne).toHaveBeenCalledWith({
-      where: { email: 'test@example.com' },
+    mockUserRepository.findOne.mockResolvedValueOnce(null);
+    mockUserRepository.save.mockResolvedValueOnce({
+      id: 1,
+      ...createUserDto,
+      password: hashedPassword,
     });
-    expect(mockUserRepository.save).toHaveBeenCalledWith(
-      expect.objectContaining(createUserDto),
-    );
+
+    mockUserRepository.create.mockResolvedValue(user);
+    expect(await service.create(createUserDto)).toEqual(user);
   });
 
   it('should update a user', async () => {

@@ -33,11 +33,9 @@ export class UserService {
     });
 
     if (existingUser) {
-      console.log('User with email already exists:', createUserDto.email);
       throw new HttpException('Email já registrado.', HttpStatus.BAD_REQUEST);
     }
     try {
-      console.log('Saving new user:', createUserDto);
       const saltOrRounds = 10; // o custo do processamento, 10 é geralmente suficiente
       const hash = await bcrypt.hash(createUserDto.password, saltOrRounds);
       createUserDto.password = hash; // substitui a senha original pelo hash
@@ -45,15 +43,10 @@ export class UserService {
         this.userRepository.create(createUserDto),
       );
     } catch (error) {
-      if (error.code === 'ER_DUP_ENTRY') {
-        throw new HttpException('Email já registrado.', HttpStatus.BAD_REQUEST);
-      } else {
-        console.error('Erro ao salvar o usuario:', error);
-        throw new HttpException(
-          'Erro ao criar o registro. Tente novamente mais tarde.',
-          HttpStatus.INTERNAL_SERVER_ERROR,
-        );
-      }
+      throw new HttpException(
+        'Erro ao criar o registro. Tente novamente mais tarde.',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
     }
   }
 

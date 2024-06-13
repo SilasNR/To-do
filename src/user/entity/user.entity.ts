@@ -1,7 +1,6 @@
 import { Project } from 'src/project/entity/project.entity';
 import { Team } from 'src/team/entity/team.entity';
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
-// import { Equipe } from "./equipe.entity";
 
 @Entity('user')
 export class User {

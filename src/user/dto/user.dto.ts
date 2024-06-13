@@ -1,4 +1,4 @@
-import { IsEmail, IsString, Length, Matches, IsBoolean } from 'class-validator';
+import { IsEmail, IsString, Length, Matches} from 'class-validator';
 import { PartialType } from '@nestjs/mapped-types';
 import { ApiProperty } from '@nestjs/swagger';
 
@@ -20,8 +20,6 @@ export class CreateUserDto {
       'a senha deve ter pelo menos 8 caracteres, incluindo uma pelo menos: uma letra maiúscula, uma letra minúscula, um número e um caractere especial',
   })
   password: string;
-
-
 
   @ApiProperty({ description: 'Resposta da pergunta secreta para recuperar a senha' })
   @IsString()
