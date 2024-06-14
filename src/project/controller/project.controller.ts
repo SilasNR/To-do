@@ -6,10 +6,13 @@ import {
   Param,
   Post,
   Put,
+  Req,
+  UseGuards,
 } from '@nestjs/common';
 import { CreateProjectDto, UpdateProjectDto } from '../dto/project.dto';
 import { ProjectService } from '../service/project.service';
 import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { JwtAuthGuard } from 'src/auth/guard/jwt-auth.guard.strategy';
 
 @Controller('project')
 @ApiTags('project')
@@ -23,6 +26,13 @@ export class ProjectController {
     return this.projectService.findAll();
   }
 
+  @UseGuards(JwtAuthGuard)
+  @Get('user')
+  async getUserProjects(@Req() req) {
+    const userId = req.user.userId; // Pegando o ID do usuário autenticado
+    return this.projectService.findByUserId(userId);
+  }
+  
   @Get('user/:iduser')
   @ApiOperation({ summary: 'Retorna todos os projetos do usuario' })
   @ApiResponse({ status: 200, description: 'Success.' })

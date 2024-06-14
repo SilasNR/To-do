@@ -33,6 +33,10 @@ export class ProjectService {
     return project;
   }
 
+  async findByUserId(userId: number): Promise<Project[]> {
+    return this.projectRepository.find({ where: { userIdUser: userId } });
+  }
+
   async create(createProjectDto: CreateProjectDto): Promise<Project> {
     try {
       return await this.projectRepository.save(
