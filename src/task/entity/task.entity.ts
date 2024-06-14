@@ -6,6 +6,7 @@ import {
   PrimaryGeneratedColumn,
   ManyToOne,
   OneToMany,
+  JoinColumn,
 } from 'typeorm';
 
 @Entity('task')
@@ -19,8 +20,12 @@ export class Task {
   @Column({ length: 100 })
   description: string;
 
+  @Column()
+  projetoId: number;
+
   // projeto da tarefa
   @ManyToOne(() => Project, (project) => project.task)
+  @JoinColumn({ name: 'projetoId' })
   project: Project[];
 
   // tags da tarefa

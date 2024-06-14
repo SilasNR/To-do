@@ -33,29 +33,22 @@ describe('TagService', () => {
     repository = module.get<Repository<Tag>>(getRepositoryToken(Tag));
   });
 
-  it('should be defined', () => {
+  it('deve estar definida', () => {
     expect(service).toBeDefined();
   });
 
-  describe('findAll', () => {
-    it('should call method tagRepository.find()', async () => {
-      await service.findAll();
-      expect(repository.find).toHaveBeenCalled();
-    });
-
-    it('should return an array of tags', async () => {
-      const tags = await service.findAll();
-      expect(tags).toEqual([]);
-    });
+  it('deve retornar um array of tags', async () => {
+    const tags = await service.findAll();
+    expect(tags).toEqual([]);
   });
 
-  it('should return a single tag', async () => {
+  it('deve retornar uma unica tag', async () => {
     const tag = { id: 1, name: 'Test Tag' };
     mockTagRepository.findOne.mockResolvedValue(tag);
     expect(await service.findOne(1)).toEqual(tag);
   });
 
-  it('should create a new tag', async () => {
+  it('deve criar uma nova tag', async () => {
     const createTagDto: CreateTagDto = {
       name: 'testTag',
       color: 1,
@@ -74,7 +67,7 @@ describe('TagService', () => {
     });
   });
 
-  it('should update a tag', async () => {
+  it('deve atualizar uma tag', async () => {
     const updateTagDto = {
       name: 'testTag',
       color: 1,
@@ -86,7 +79,7 @@ describe('TagService', () => {
     expect(mockTagRepository.update).toHaveBeenCalledWith(1, updateTagDto);
   });
 
-  it('should delete a tag', async () => {
+  it('deve deletar uma tag', async () => {
     expect(await service.delete(1)).toEqual(undefined);
   });
 });

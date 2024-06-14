@@ -1,4 +1,4 @@
-import { IsString, IsDate } from 'class-validator';
+import { IsString, IsInt } from 'class-validator';
 import { PartialType } from '@nestjs/mapped-types';
 import { ApiProperty } from '@nestjs/swagger';
 
@@ -11,6 +11,9 @@ export class CreateTaskDto {
   @IsString()
   description: string;
 
+  @ApiProperty({ description: 'Id do projeto a qual a tag pertence' })
+  @IsInt()
+  projetoId: number;
 }
 
 export class UpdateTaskDto extends PartialType(CreateTaskDto) {}
