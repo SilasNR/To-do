@@ -7,10 +7,13 @@ import {
   Param,
   Post,
   Put,
+  Req,
+  UseGuards,
 } from '@nestjs/common';
 import { CreateProjectDto, UpdateProjectDto } from '../dto/project.dto';
 import { ProjectService } from '../service/project.service';
 import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { JwtAuthGuard } from 'src/auth/guard/jwt-auth.guard.strategy';
 
 @Controller('project')
 @ApiTags('project')
@@ -81,4 +84,13 @@ export class ProjectController {
   async delete(@Param('id') id: number): Promise<void> {
     return this.projectService.delete(id);
   }
+
+  @UseGuards(JwtAuthGuard)
+  @Get('user')
+  async getUserProjects(@Req() req) {
+    const userId = req.user.userId;
+    return this.projectService.findByUserId(userId);
+  }
+
+
 }

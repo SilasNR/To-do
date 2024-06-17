@@ -21,6 +21,11 @@ export class ProjectService {
     });
   }
 
+  async findAllTaskProject(projetoId: number): Promise<Project[]> {
+    return await this.projectRepository.find({
+      where: {}
+    })
+  }
 
   async findOne(id: number): Promise<Project> {
     const project = await this.projectRepository.findOne({
@@ -58,5 +63,9 @@ export class ProjectService {
     if (result.affected === 0) {
       throw new HttpException(`Não encontrado.`, HttpStatus.NOT_FOUND);
     }
+  }
+
+  async findByUserId(userId: number): Promise<Project[]> {
+    return this.projectRepository.find({ where: { userIdUser: userId } });
   }
 }
