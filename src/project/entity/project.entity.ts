@@ -34,9 +34,6 @@ export class Project {
   @OneToMany(() => Task, (task) => task.project)
   task: Task[];
 
-  @Column()
-  taskIdTask: number;
-
   // equipe do projeto
   @OneToMany(() => Team, (team) => team.project)
   team: Team[];
