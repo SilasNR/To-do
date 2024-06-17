@@ -15,6 +15,7 @@ export class CreateProjectDto {
   @IsString()
   status_project: string;
 
+  @ApiProperty({ description: 'Id do usuario' })
   @IsInt()
   userIdUser: number;
 }

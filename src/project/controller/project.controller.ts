@@ -28,14 +28,14 @@ export class ProjectController {
     return this.projectService.findAll();
   }
 
-  @Get('user/:iduser')
-  @ApiOperation({ summary: 'Retorna todos os projetos do usuario' })
-  @ApiResponse({ status: 200, description: 'Operação bem sucedida.' })
-  @ApiResponse({ status: 400, description: 'Erro.' })
-  @ApiResponse({ status: 404, description: 'Não encontrado.' })
-  async findAllUserProject(@Param('iduser') iduser: number): Promise<any[]> {
-    return this.projectService.findAllUserProject(iduser);
-  }
+  // @Get('user/:iduser')
+  // @ApiOperation({ summary: 'Retorna todos os projetos do usuario' })
+  // @ApiResponse({ status: 200, description: 'Operação bem sucedida.' })
+  // @ApiResponse({ status: 400, description: 'Erro.' })
+  // @ApiResponse({ status: 404, description: 'Não encontrado.' })
+  // async findAllUserProject(@Param('iduser') iduser: number): Promise<any[]> {
+  //   return this.projectService.findAllUserProject(iduser);
+  // }
 
   @Get(':id')
   @ApiOperation({ summary: 'Retorna um projeto pelo id' })
@@ -86,11 +86,9 @@ export class ProjectController {
   }
 
   @UseGuards(JwtAuthGuard)
-  @Get('user')
+  @Get('user/:iduser')
   async getUserProjects(@Req() req) {
     const userId = req.user.userId;
     return this.projectService.findByUserId(userId);
   }
-
-
 }

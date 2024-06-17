@@ -25,6 +25,17 @@ export class TaskController {
     return this.taskService.findAll();
   }
 
+  @Get('project/:idproject')
+  @ApiOperation({ summary: 'Retorna todos as tasks do projeto' })
+  @ApiResponse({ status: 200, description: 'Operação bem sucedida.' })
+  @ApiResponse({ status: 400, description: 'Erro.' })
+  @ApiResponse({ status: 404, description: 'Não encontrado.' })
+  async findAllUserProject(
+    @Param('idproject') idproject: number,
+  ): Promise<any[]> {
+    return this.taskService.findAllProjectTask(idproject);
+  }
+
   @Get(':id')
   @ApiOperation({ summary: 'Retorna uma tarefa pelo id' })
   @ApiResponse({ status: 200, description: 'Operação bem sucedida.' })

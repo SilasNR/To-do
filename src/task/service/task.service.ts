@@ -26,6 +26,12 @@ export class TaskService {
     return task;
   }
 
+  async findAllProjectTask(idproject: number): Promise<Task[]> {
+    return await this.taskRepository.find({
+      where: { projetoId: idproject },
+    });
+  }
+
   async create(createTaskDto: CreateTaskDto): Promise<Task> {
     try {
       return await this.taskRepository.save(

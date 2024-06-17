@@ -1,4 +1,10 @@
-import { HttpException, HttpStatus, Injectable, NotImplementedException } from '@nestjs/common';
+import {
+  HttpException,
+  HttpStatus,
+  Injectable,
+  NotImplementedException,
+  Logger,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Project } from '../entity/project.entity';
@@ -6,6 +12,7 @@ import { CreateProjectDto, UpdateProjectDto } from '../dto/project.dto';
 
 @Injectable()
 export class ProjectService {
+  private readonly logger = new Logger(ProjectService.name);
   constructor(
     @InjectRepository(Project)
     private projectRepository: Repository<Project>,
@@ -16,15 +23,10 @@ export class ProjectService {
   }
 
   async findAllUserProject(iduser: number): Promise<Project[]> {
+    this.logger.debug(`Recebendo dados de projetos do usuario com id: ${JSON.stringify(iduser)}`);
     return await this.projectRepository.find({
-      where:{userIdUser: iduser},
+      where: { userIdUser: iduser },
     });
-  }
-
-  async findAllTaskProject(projetoId: number): Promise<Project[]> {
-    return await this.projectRepository.find({
-      where: {}
-    })
   }
 
   async findOne(id: number): Promise<Project> {
@@ -39,6 +41,9 @@ export class ProjectService {
   }
 
   async create(createProjectDto: CreateProjectDto): Promise<Project> {
+    this.logger.debug(
+      `Recebendo dados do projeto: ${JSON.stringify(createProjectDto)}`,
+    );
     try {
       return await this.projectRepository.save(
         this.projectRepository.create(createProjectDto),
